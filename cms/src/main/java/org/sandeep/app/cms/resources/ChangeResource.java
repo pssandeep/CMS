@@ -17,44 +17,44 @@ import org.sandeep.app.cms.service.ChangeService;
 
 @Path("/changes")
 public class ChangeResource {
-	
+
 	private ChangeService changeService = new ChangeService();
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Change> getChanges(){
+	public List<Change> getChanges() {
 		return changeService.getAllChanges();
 	}
-	
+
 	@GET
 	@Path("/{changeid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Change getChange(@PathParam("changeid") long id){
+	public Change getChange(@PathParam("changeid") long id) {
 		return changeService.getChange(id);
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Change addChange(Change change){
+	public Change addChange(Change change) {
 
 		return changeService.addChange(change);
-	}	
+	}
 
 	@PUT
 	@Path("/{messageid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Change updateChange(@PathParam("messageid") long id, Change change){
+	public Change updateChange(@PathParam("messageid") long id, Change change) {
 		change.setId(id);
-		return changeService.updateChange(id,change);
+		return changeService.updateChange(id, change);
 	}
 
 	@DELETE
 	@Path("/{messageid}")
-	public void deleteChange(@PathParam("messageid") long id){
+	public void deleteChange(@PathParam("messageid") long id) {
 
 		changeService.deleteChange(id);
 	}
-	
+
 }

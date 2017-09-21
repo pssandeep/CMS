@@ -10,7 +10,7 @@ import org.bson.Document;
 public class ConnectToMongoDB { 
    
 @SuppressWarnings("resource")
-public static MongoDatabase getMongoDB() {  
+public static void main(String args[]) {  
       
       // Creating a Mongo client 
       MongoClient mongo = new MongoClient( "localhost" , 27017 ); 
@@ -42,8 +42,6 @@ public static MongoDatabase getMongoDB() {
       collection.insertOne(document); 
       System.out.println("Document inserted successfully");  
       
-      
-      
-      return database;
+
    } 
 }
