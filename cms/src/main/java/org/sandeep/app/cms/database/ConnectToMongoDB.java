@@ -1,5 +1,9 @@
 package org.sandeep.app.cms.database;
 
+
+import java.util.Iterator;
+
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase; 
 import com.mongodb.MongoClient; 
@@ -16,31 +20,44 @@ public static void main(String args[]) {
       MongoClient mongo = new MongoClient( "localhost" , 27017 ); 
    
       // Creating Credentials 
-      MongoCredential credential; 
-      credential = MongoCredential.createCredential("", "test", 
-         "".toCharArray()); 
-      System.out.println("Connected to the database successfully");  
+//      MongoCredential credential; 
+//      credential = MongoCredential.createCredential("", "test", 
+//         "".toCharArray()); 
+//      System.out.println("Connected to the database successfully");  
       
       // Accessing the database 
       MongoDatabase database = mongo.getDatabase("test"); 
-      System.out.println("Credentials ::"+ credential);    
+//      System.out.println("Credentials ::"+ credential);    
       
       //Creating a collection 
-      database.createCollection("sampleCollection2"); 
-      System.out.println("Collection created successfully"); 
+//      database.createCollection("sampleCollection2"); 
+//      System.out.println("Collection created successfully"); 
       
       // Retrieving a collection
       MongoCollection<Document> collection = database.getCollection("sampleCollection2"); 
-      System.out.println("Collection myCollection selected successfully"); 
+      System.out.println("Collection myCollection selected successfully" + collection); 
       
-      Document document = new Document("title", "MongoDB") 
-      .append("id", 1)
-      .append("description", "database") 
-      .append("likes", 100) 
-      .append("url", "http://www.tutorialspoint.com/mongodb/") 
-      .append("by", "tutorials point");  
-      collection.insertOne(document); 
-      System.out.println("Document inserted successfully");  
+//      Document document = new Document("title", "MongoDB") 
+//      .append("id", 1)
+//      .append("description", "database") 
+//      .append("likes", 100) 
+//      .append("url", "http://www.tutorialspoint.com/mongodb/") 
+//      .append("by", "tutorials point");  
+//      collection.insertOne(document); 
+//      System.out.println("Document inserted successfully");  
+      
+      
+      // Getting the iterable object 
+      FindIterable<Document> iterDoc = collection.find(); 
+      int i = 1; 
+
+      // Getting the iterator 
+      Iterator it = iterDoc.iterator(); 
+    
+      while (it.hasNext()) {  
+         System.out.println(it.next());  
+      i++; 
+      }
       
 
    } 

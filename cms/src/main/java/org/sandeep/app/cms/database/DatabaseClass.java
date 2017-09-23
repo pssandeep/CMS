@@ -47,6 +47,7 @@ public class DatabaseClass {
 	}
 
 	public static MongoCollection<Document> retrieveCollection(String collName) {
+		
 		// Retrieving a collection
 		MongoCollection<Document> collection = database.getCollection(collName);
 		System.out.println("Collection myCollection selected successfully");
@@ -54,9 +55,10 @@ public class DatabaseClass {
 		return collection;
 	}
 
-	public static void addDocument(MongoCollection<Document> collection,
-			Document newDocument) {
-
+	public static void addDocument(String collName,Document newDocument) {
+		
+		//add Document
+		MongoCollection<Document> collection = database.getCollection(collName);
 		collection.insertOne(newDocument);
 		System.out.println("Document inserted successfully");
 	}
