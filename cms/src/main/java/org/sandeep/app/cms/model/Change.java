@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Change {
 	
-	private long id;
+	private String id;
 	private String header;
 	private String description;
 	private String system;
@@ -38,10 +38,10 @@ public class Change {
 	public void setSystem(String system) {
 		this.system = system;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getHeader() {

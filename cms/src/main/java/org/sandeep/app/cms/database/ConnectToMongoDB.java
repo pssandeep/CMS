@@ -1,7 +1,11 @@
 package org.sandeep.app.cms.database;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -10,6 +14,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;  
 
 import org.bson.Document;
+import org.sandeep.app.cms.model.Change;
 
 public class ConnectToMongoDB { 
    
@@ -34,7 +39,7 @@ public static void main(String args[]) {
 //      System.out.println("Collection created successfully"); 
       
       // Retrieving a collection
-      MongoCollection<Document> collection = database.getCollection("sampleCollection2"); 
+      MongoCollection<Document> collection = database.getCollection("sampleCollection"); 
       System.out.println("Collection myCollection selected successfully" + collection); 
       
 //      Document document = new Document("title", "MongoDB") 
@@ -46,17 +51,31 @@ public static void main(String args[]) {
 //      collection.insertOne(document); 
 //      System.out.println("Document inserted successfully");  
       
-      
+//	    {
+//      "creationDate": "2017-09-19",
+//      "description": "Change to Payment Stored Procedure to update the status of the payment that is set. This involves updaing the stored procedure at the database level and application code.",
+//      "header": "Change to Payment Stored Procedure",
+//      "implementDate": "2017-09-22",
+//      "status": "New",
+//      "system": "DEVON Trade Settlement  System"
+//  }	      
       // Getting the iterable object 
       FindIterable<Document> iterDoc = collection.find(); 
-      int i = 1; 
 
       // Getting the iterator 
       Iterator it = iterDoc.iterator(); 
-    
+      Document doc = new Document();
+      List<Change> allChange = new ArrayList<>();
       while (it.hasNext()) {  
-         System.out.println(it.next());  
-      i++; 
+    	 doc = (Document) it.next();
+    	 Change tempChange = new Change();
+    	 tempChange.setCreationDate(doc.getString("creationDate"));
+    	 tempChange.setDescription(doc.getString("description"));
+    	 tempChange.setHeader(doc.getString("header"));
+    	 tempChange.setImplementDate(doc.getString("implementDate"));
+    	 tempChange.setStatus(doc.getString("status"));
+    	 tempChange.setSystem(doc.getString("system"));
+    	 allChange.add(tempChange);
       }
       
 

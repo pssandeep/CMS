@@ -39,7 +39,7 @@ public class DatabaseClass {
 		return database;
 	}
 
-	public static void createColletion(String collName) {
+	public static void createCollection(String collName) {
 
 		// Creating a collection
 		database.createCollection(collName);
@@ -55,10 +55,9 @@ public class DatabaseClass {
 		return collection;
 	}
 
-	public static void addDocument(String collName,Document newDocument) {
+	public static void addDocument(MongoCollection<Document> collection,Document newDocument) {
 		
 		//add Document
-		MongoCollection<Document> collection = database.getCollection(collName);
 		collection.insertOne(newDocument);
 		System.out.println("Document inserted successfully");
 	}

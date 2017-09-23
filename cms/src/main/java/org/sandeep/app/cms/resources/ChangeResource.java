@@ -26,12 +26,12 @@ public class ChangeResource {
 		return changeService.getAllChanges();
 	}
 
-	@GET
-	@Path("/{changeid}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Change getChange(@PathParam("changeid") long id) {
-		return changeService.getChange(id);
-	}
+//	@GET
+//	@Path("/{changeid}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Change getChange(@PathParam("changeid") long id) {
+//		return changeService.getChange(id);
+//	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,20 +41,20 @@ public class ChangeResource {
 		return changeService.addChange(change);
 	}
 
-	@PUT
-	@Path("/{messageid}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Change updateChange(@PathParam("messageid") long id, Change change) {
-		change.setId(id);
-		return changeService.updateChange(id, change);
-	}
+//	@PUT
+//	@Path("/{messageid}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public Change updateChange(@PathParam("messageid") long id, Change change) {
+//		change.setId(id);
+//		return changeService.updateChange(id, change);
+//	}
 
-	@DELETE
-	@Path("/{messageid}")
-	public void deleteChange(@PathParam("messageid") long id) {
-
-		changeService.deleteChange(id);
-	}
+//	@DELETE
+//	@Path("/{messageid}")
+//	public void deleteChange(@PathParam("messageid") long id) {
+//
+//		changeService.deleteChange(id);
+//	}
 
 }
