@@ -49,12 +49,24 @@
 			<artifactId>jersey-hk2</artifactId>
 		</dependency>
 		<!-- uncomment this to get JSON support -->
-		<dependency> <groupId>org.glassfish.jersey.media</groupId> 
-			<artifactId>jersey-media-json-binding</artifactId> </dependency> 
-<dependency>
-    <groupId>org.mongodb</groupId>
-    <artifactId>mongo-java-driver</artifactId>
-    <version>3.4.2</version>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-binding</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+    <groupId>org.mongojack</groupId>
+    <artifactId>mongojack</artifactId>
+    <version>2.7.0</version>
 </dependency>
 	</dependencies>
 

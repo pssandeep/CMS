@@ -15,6 +15,7 @@ public class DatabaseClass {
 
 	private static Map<Long, Change> changes = new HashMap<>();
 	private static MongoDatabase database;
+	private static MongoCredential credential;
 
 	public static Map<Long, Change> getChanges() {
 		return changes;
@@ -27,7 +28,6 @@ public class DatabaseClass {
 		MongoClient mongo = new MongoClient("localhost", 27017);
 
 		// Creating Credentials
-		MongoCredential credential;
 		credential = MongoCredential.createCredential("", "test",
 				"".toCharArray());
 		System.out.println("Connected to the database successfully");
@@ -60,6 +60,7 @@ public class DatabaseClass {
 		//add Document
 		collection.insertOne(newDocument);
 		System.out.println("Document inserted successfully");
+		
 	}
 
 }

@@ -16,12 +16,13 @@ import org.sandeep.app.cms.model.Change;
 import org.sandeep.app.cms.service.ChangeService;
 
 @Path("/changes")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ChangeResource {
 
 	private ChangeService changeService = new ChangeService();
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Change> getChanges() {
 		return changeService.getAllChanges();
 	}
@@ -34,8 +35,6 @@ public class ChangeResource {
 //	}
 
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Change addChange(Change change) {
 
 		return changeService.addChange(change);
@@ -43,8 +42,6 @@ public class ChangeResource {
 
 //	@PUT
 //	@Path("/{messageid}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
 //	public Change updateChange(@PathParam("messageid") long id, Change change) {
 //		change.setId(id);
 //		return changeService.updateChange(id, change);

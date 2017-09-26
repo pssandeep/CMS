@@ -1,12 +1,17 @@
 package org.sandeep.app.cms.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.bson.Document;
 import org.sandeep.app.cms.database.DatabaseClass;
 import org.sandeep.app.cms.model.Change;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -21,26 +26,40 @@ public class ChangeService {
 				.retrieveCollection("sampleCollection");
 	      // Getting the iterable object 
 	      FindIterable<Document> iterDoc = dbDoc.find(); 
-	      int i = 1; 
 
 	      // Getting the iterator 
 	      Iterator it = iterDoc.iterator(); 
 	      Document doc = new Document();
 	      List<Change> allChange = new ArrayList<>();
+	      ObjectMapper mapper = new ObjectMapper();
 	      while (it.hasNext()) {  
 	    	 doc = (Document) it.next();
-	    	 Change tempChange = new Change();
-	    	 tempChange.setCreationDate(doc.getString("creationDate"));
-	    	 tempChange.setDescription(doc.getString("description"));
-	    	 tempChange.setHeader(doc.getString("header"));
-	    	 tempChange.setImplementDate(doc.getString("implementDate"));
-	    	 tempChange.setStatus(doc.getString("status"));
-	    	 tempChange.setSystem(doc.getString("system"));
-	    	 tempChange.setId(doc.getString("id"));
-	    	 allChange.add(tempChange);
+//	    	 Change tempChange = new Change();
+//	    	 tempChange.setCreationDate(doc.getString("creationDate"));
+//	    	 tempChange.setDescription(doc.getString("description"));
+//	    	 tempChange.setHeader(doc.getString("header"));
+//	    	 tempChange.setImplementDate(doc.getString("implementDate"));
+//	    	 tempChange.setStatus(doc.getString("status"));
+//	    	 tempChange.setSystem(doc.getString("system"));
+//	    	 tempChange.setId(doc.getString("id"));
+//	    	 allChange.add(tempChange);
 	    	 
-	         System.out.println("DOCUMENT: " +doc.getString("creationDate"));  
-	      i++; 
+	         System.out.println("DOCUMENT: " +doc.toString());  
+	         Change tempChange = null;
+			try {
+				tempChange = mapper.readValue(doc.toString().substring(8), Change.class);
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	         allChange.add(tempChange);
+	      
 	      }	
 		return new ArrayList<Change>(allChange);
 	}
