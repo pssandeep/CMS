@@ -2,6 +2,8 @@ package org.sandeep.app.cms.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement
 public class Change {
 	
@@ -12,6 +14,8 @@ public class Change {
 	private String status;
 	private String creationDate;
 	private String implementDate;
+	@JsonIgnore
+	private String _id;
 	
 	
 	public String getCreationDate() {
@@ -55,6 +59,12 @@ public class Change {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
 }

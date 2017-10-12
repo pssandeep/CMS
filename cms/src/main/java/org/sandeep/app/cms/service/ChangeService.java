@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 
 public class ChangeService {
 
@@ -44,10 +46,11 @@ public class ChangeService {
 //	    	 tempChange.setId(doc.getString("id"));
 //	    	 allChange.add(tempChange);
 	    	 
-	         System.out.println("DOCUMENT: " +doc.toString());  
+	         System.out.println("DOCUMENT: " +doc.toJson());  
 	         Change tempChange = null;
 			try {
-				tempChange = mapper.readValue(doc.toString().substring(8), Change.class);
+				//tempChange = mapper.readValue(doc.toString().substring(8), Change.class);
+				tempChange = mapper.readValue(doc.toJson(), Change.class);
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,13 +99,26 @@ public class ChangeService {
 		DatabaseClass.addDocument(dbDoc, document);
 		return change;
 	}
-//
-//	public Change updateChange(long id, Change change) {
-//
-//		changes.put(id, change);
-//		return change;
-//	}
-//
+
+	public Change updateChange(String id, Change change) {
+
+		//Retrieve Collections
+		MongoCollection<Document> dbDoc = DatabaseClass
+				.retrieveCollection("sampleCollection");
+
+		Document document = new Document("creationDate", change.getCreationDate())
+		.append("description", change.getDescription())
+		.append("header", change.getHeader())
+		.append("implementDate", change.getImplementDate())
+		.append("status", change.getStatus())
+		.append("system", change.getSystem())
+		.append("id", id);
+		
+	    //Update Collections
+	    DatabaseClass.updateDocument(dbDoc,id, document);
+		return change;
+	}
+
 //	public void deleteChange(long id) {
 //
 //		changes.remove(id);

@@ -10,6 +10,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 public class DatabaseClass {
 
@@ -60,6 +61,15 @@ public class DatabaseClass {
 		//add Document
 		collection.insertOne(newDocument);
 		System.out.println("Document inserted successfully");
+		
+	}
+
+	public static void updateDocument(MongoCollection<Document> collection,String id,Document newDocument) {
+		
+		//update Document
+		System.out.println(Filters.eq("id", id));
+		collection.replaceOne((Filters.eq("id", id)), newDocument);  
+		System.out.println("Document updated successfully");
 		
 	}
 

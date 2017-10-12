@@ -40,12 +40,11 @@ public class ChangeResource {
 		return changeService.addChange(change);
 	}
 
-//	@PUT
-//	@Path("/{messageid}")
-//	public Change updateChange(@PathParam("messageid") long id, Change change) {
-//		change.setId(id);
-//		return changeService.updateChange(id, change);
-//	}
+	@PUT
+	@Path("/{messageid}")
+	public Change updateChange(@PathParam("messageid") String id, Change change) {
+		return changeService.updateChange(id, change);
+	}
 
 //	@DELETE
 //	@Path("/{messageid}")
