@@ -27,12 +27,11 @@ public class ChangeResource {
 		return changeService.getAllChanges();
 	}
 
-//	@GET
-//	@Path("/{changeid}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Change getChange(@PathParam("changeid") long id) {
-//		return changeService.getChange(id);
-//	}
+	@GET
+	@Path("/{changeid}")
+	public List<Change> getChange(@PathParam("changeid") String id) {
+		return changeService.getChange(id);
+	}
 
 	@POST
 	public Change addChange(Change change) {

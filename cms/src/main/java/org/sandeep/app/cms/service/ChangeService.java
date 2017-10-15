@@ -12,6 +12,7 @@ import org.sandeep.app.cms.model.Change;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -67,9 +68,43 @@ public class ChangeService {
 		return new ArrayList<Change>(allChange);
 	}
 
-//	public Change getChange(long id) {
-//		return changes.get(id);
-//	}
+	public List<Change> getChange(String id) {
+		MongoCollection<Document> dbDoc = DatabaseClass
+				.retrieveCollection("sampleCollection");
+		
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.put("id", id);
+		
+	      // Getting the iterable object 
+	      FindIterable<Document> iterDoc = dbDoc.find(whereQuery); 
+
+	      // Getting the iterator 
+	      Iterator it = iterDoc.iterator(); 
+	      Document doc = new Document();
+	      List<Change> allChange = new ArrayList<>();
+	      ObjectMapper mapper = new ObjectMapper();
+	      while (it.hasNext()) {  
+	    	 doc = (Document) it.next();	    	 
+	         System.out.println("DOCUMENT: " +doc.toJson());  
+	         Change tempChange = null;
+			try {
+				//tempChange = mapper.readValue(doc.toString().substring(8), Change.class);
+				tempChange = mapper.readValue(doc.toJson(), Change.class);
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	         allChange.add(tempChange);
+	      
+	      }	
+		return new ArrayList<Change>(allChange);
+	}
 
 	public Change addChange(Change change) {
 
