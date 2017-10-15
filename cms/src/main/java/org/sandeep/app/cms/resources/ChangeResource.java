@@ -45,11 +45,11 @@ public class ChangeResource {
 		return changeService.updateChange(id, change);
 	}
 
-//	@DELETE
-//	@Path("/{messageid}")
-//	public void deleteChange(@PathParam("messageid") long id) {
-//
-//		changeService.deleteChange(id);
-//	}
+	@DELETE
+	@Path("/{messageid}")
+	public void deleteChange(@PathParam("messageid") String id) {
+
+		changeService.deleteChange(id);
+	}
 
 }

@@ -18,6 +18,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.DeleteResult;
 
 public class ChangeService {
 
@@ -154,10 +155,18 @@ public class ChangeService {
 		return change;
 	}
 
-//	public void deleteChange(long id) {
-//
-//		changes.remove(id);
-//
-//	}
+	public void deleteChange(String id) {
+
+		MongoCollection<Document> dbDoc = DatabaseClass
+				.retrieveCollection("sampleCollection");
+		
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.put("id", id);
+		
+	      // Getting the iterable object 
+	      DeleteResult iterDoc = dbDoc.deleteOne(whereQuery);
+	      System.out.println(iterDoc.getDeletedCount() + " document(s) deleted.");
+
+	}
 
 }
