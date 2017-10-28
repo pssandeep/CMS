@@ -39,7 +39,7 @@ public static void main(String args[]) {
 //      System.out.println("Collection created successfully"); 
       
       // Retrieving a collection
-      MongoCollection<Document> collection = database.getCollection("sampleCollection"); 
+      MongoCollection<Document> collection = database.getCollection("ChangeRequests"); 
       System.out.println("Collection myCollection selected successfully" + collection); 
       
 //      Document document = new Document("title", "MongoDB") 
